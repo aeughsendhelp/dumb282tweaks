@@ -1,0 +1,8 @@
+<Project>
+	<PropertyGroup>
+		<ReferencePath>
+			G:\SteamLibrary\steamapps\common\Derail Valley\DerailValley_Data\Managed\
+		</ReferencePath>
+		<AssemblySearchPaths>$(AssemblySearchPaths);$(ReferencePath);</AssemblySearchPaths>
+	</PropertyGroup>
+</Project>	

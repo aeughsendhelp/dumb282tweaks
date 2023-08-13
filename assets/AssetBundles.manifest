@@ -1,0 +1,7 @@
+ManifestFileVersion: 0
+CRC: 966447639
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: models.fullcab
+      Dependencies: {}

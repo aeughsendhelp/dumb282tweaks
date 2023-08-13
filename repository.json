@@ -1,9 +1,9 @@
 {
 	"Releases": [
 		{
-			"Id": "MOD_NAME",
+			"Id": "dumb282tweaks",
 			"Version": "1.0.0",
-			"DownloadUrl": "https://github.com/OWNER/REPOSITORY/releases/download/TAG/FILE_NAME.zip"
+			"DownloadUrl": "https://github.com/aeughsendhelp/dumb282tweaks/releases/download/TAG/FILE_NAME.zip"
 		}
 	]
 }
