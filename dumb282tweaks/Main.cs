@@ -8,7 +8,6 @@ using System.Collections.Generic;
 using DV;
 using UnityEngine.UI;
 using System.ComponentModel;
-using static dumb282tweaks.Main;
 
 namespace dumb282tweaks;
 
@@ -29,6 +28,8 @@ public static class Main {
 		"German"
 	};
 
+	private static AssetBundle loadedAssetBundle;
+
 	// Load
 	private static bool Load(UnityModManager.ModEntry modEntry) {
 		Harmony? harmony = null;
@@ -43,8 +44,7 @@ public static class Main {
 			harmony = new Harmony(Instance.Info.Id);
 			harmony.PatchAll(Assembly.GetExecutingAssembly());
 
-			//var assets = AssetBundle.LoadFromFile(Path.Combine(modEntry.Path, "model.fullcab"));
-			//var fullcab = assets.LoadAsset<GameObject>("fullcab");
+			WorldStreamingInit.LoadingFinished += GameLoaded;
 		} catch (Exception ex) {
 			Instance.Logger.LogException($"Failed to load {Instance.Info.DisplayName}:", ex);
 			harmony?.UnpatchAll(Instance.Info.Id);
@@ -52,6 +52,29 @@ public static class Main {
 		}
 
 		return true;
+	}
+
+	private static void GameLoaded() {
+		WorldMover worldMoverScript = GameObject.Find("WorldMover").GetComponent<WorldMover>();
+
+		// Asset Loading
+		var modelPath = Path.Combine(Instance.Path.ToString(), "assets\\fullcab");
+		var loadedAssetBundle = AssetBundle.LoadFromFile(modelPath);
+
+		GameObject fullCabLoad = loadedAssetBundle.LoadAsset<GameObject>("Assets/fullcab.prefab");
+
+		//GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+		GameObject fullCab = GameObject.Instantiate(fullCabLoad);
+		fullCab.transform.position = PlayerManager.GetWorldAbsolutePlayerPosition() + new Vector3(0, 6, 0);
+		fullCab.transform.localScale = new Vector3(1, 1, 1);
+
+		fullCab.transform.position += WorldMover.currentMove;
+		worldMoverScript.AddObjectToMove(fullCab.transform);
+
+		// Find all GameObjects
+		//foreach(GameObject obj in Resources.FindObjectsOfTypeAll<GameObject>()) {
+
+		//}
 	}
 
 	// GUI Rendering
@@ -66,9 +89,6 @@ public static class Main {
 
 		GUILayout.Label("Smoke Deflector Type");
 		Settings.smokeDeflectorType = (SmokeDeflectorType) GUILayout.SelectionGrid((int) Settings.smokeDeflectorType, smokeDeflectorTypeTexts, 1, "toggle");
-		GUILayout.Space(2);
-
-		GUILayout.Label("Texture Utility");
 
 		GUILayout.EndVertical();
 	}

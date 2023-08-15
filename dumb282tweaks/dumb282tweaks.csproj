@@ -31,6 +31,9 @@
 	  <Reference Include="Assembly-CSharp-firstpass">
 	    <HintPath>G:\SteamLibrary\steamapps\common\Derail Valley\DerailValley_Data\Managed\Assembly-CSharp-firstpass.dll</HintPath>
 	  </Reference>
+	  <Reference Include="DV.Utils">
+	    <HintPath>G:\SteamLibrary\steamapps\common\Derail Valley\DerailValley_Data\Managed\DV.Utils.dll</HintPath>
+	  </Reference>
 	  <Reference Include="UnityEngine">
 	    <HintPath>G:\SteamLibrary\steamapps\common\Derail Valley\DerailValley_Data\Managed\UnityEngine.dll</HintPath>
 	  </Reference>
