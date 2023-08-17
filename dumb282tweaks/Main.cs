@@ -6,8 +6,20 @@ using UnityModManagerNet;
 using UnityEngine;
 using System.Collections.Generic;
 using DV;
+using DV.Utils;
+using DV.Simulation;
+using DV.Common;
+using System.Linq;
+using System.Threading.Tasks;
+using DV.RemoteControls;
+using DV.Wheels;
+using DV.Simulation.Cars;
+using DV.ThingTypes;
+using LocoSim.Implementations;
+using static Oculus.Avatar.CAPI;
 using UnityEngine.UI;
 using System.ComponentModel;
+using static UnityModManagerNet.UnityModManager.Param;
 
 namespace dumb282tweaks;
 
@@ -15,6 +27,8 @@ public static class Main {
 	// Variables
 	public static UnityModManager.ModEntry Instance { get; private set; }
 	public static dumb282tweaksSettings Settings { get; private set; }
+
+	public static bool enabled;
 
 	private static readonly string[] cabTypeTexts = new[] {
 		"Default",
@@ -28,7 +42,8 @@ public static class Main {
 		"German"
 	};
 
-	private static AssetBundle loadedAssetBundle;
+	public static GameObject fullCabLoad;
+	public static GameObject smokeDeflectorLoad;
 
 	// Load
 	private static bool Load(UnityModManager.ModEntry modEntry) {
@@ -44,7 +59,13 @@ public static class Main {
 			harmony = new Harmony(Instance.Info.Id);
 			harmony.PatchAll(Assembly.GetExecutingAssembly());
 
-			WorldStreamingInit.LoadingFinished += GameLoaded;
+			// Asset Loading
+			var assetPath = Path.Combine(Instance.Path.ToString(), "assets\\");
+			var fullCabBundle = AssetBundle.LoadFromFile(Path.Combine(assetPath, "FullCab"));
+			var smokeDeflectorBundle = AssetBundle.LoadFromFile(Path.Combine(assetPath, "SmokeDeflector"));
+			fullCabLoad = fullCabBundle.LoadAsset<GameObject>("Assets/fullcab.prefab");
+			smokeDeflectorLoad = smokeDeflectorBundle.LoadAsset<GameObject>("Assets/SmokeDeflector.prefab");
+
 		} catch (Exception ex) {
 			Instance.Logger.LogException($"Failed to load {Instance.Info.DisplayName}:", ex);
 			harmony?.UnpatchAll(Instance.Info.Id);
@@ -54,34 +75,9 @@ public static class Main {
 		return true;
 	}
 
-	private static void GameLoaded() {
-		WorldMover worldMoverScript = GameObject.Find("WorldMover").GetComponent<WorldMover>();
-
-		// Asset Loading
-		var modelPath = Path.Combine(Instance.Path.ToString(), "assets\\fullcab");
-		var loadedAssetBundle = AssetBundle.LoadFromFile(modelPath);
-
-		GameObject fullCabLoad = loadedAssetBundle.LoadAsset<GameObject>("Assets/fullcab.prefab");
-
-		//GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
-		GameObject fullCab = GameObject.Instantiate(fullCabLoad);
-		fullCab.transform.position = PlayerManager.GetWorldAbsolutePlayerPosition() + new Vector3(0, 6, 0);
-		fullCab.transform.localScale = new Vector3(1, 1, 1);
-
-		fullCab.transform.position += WorldMover.currentMove;
-		worldMoverScript.AddObjectToMove(fullCab.transform);
-
-		// Find all GameObjects
-		//foreach(GameObject obj in Resources.FindObjectsOfTypeAll<GameObject>()) {
-
-		//}
-	}
-
 	// GUI Rendering
 	static void OnGUI(UnityModManager.ModEntry modEntry) {
 		GUILayout.BeginVertical();
-
-		Settings.toggleTweaks = GUILayout.Toggle(Settings.toggleTweaks, "Toggle Tweaks");
 
 		GUILayout.Label("Cab Type");
 		Settings.cabType = (CabType)GUILayout.SelectionGrid((int)Settings.cabType, cabTypeTexts, 1, "toggle");
@@ -96,21 +92,29 @@ public static class Main {
 		Settings.Save(modEntry);
 	}
 
-	// Logger Commands
-	public static void Log(string message) {
-		Instance.Logger.Log(message);
-	}
-	public static void Warning(string message) {
-		Instance.Logger.Warning(message);
-	}
-	public static void Error(string message) {
-		Instance.Logger.Error(message);
+    [HarmonyPatch(typeof(TrainCar), "Start")]
+    class CarPatch {
+		static void Postfix(ref TrainCar __instance) {
+			if(__instance is not null && __instance.carType == TrainCarType.LocoSteamHeavy) {
+				GameObject fullCab = UnityEngine.Object.Instantiate(fullCabLoad);
+				fullCab.transform.parent = __instance.transform;
+				fullCab.transform.localPosition = new Vector3(0, 3, 0);
+				fullCab.transform.localRotation = Quaternion.identity;
+				fullCab.transform.localScale = new Vector3(1, 1, 1);
+
+				GameObject smokeDeflector = UnityEngine.Object.Instantiate(smokeDeflectorLoad);
+				smokeDeflector.transform.parent = __instance.transform;
+				smokeDeflector.transform.localPosition = new Vector3(0, 2.55f, 10.23f);
+				smokeDeflector.transform.localRotation = Quaternion.identity;
+				smokeDeflector.transform.localScale = new Vector3(1, 1, 1);
+			}
+		}
 	}
 
 	public enum CabType {
 		[Description("Default 282 Cab")]
 		Default,
-		[Description("German Type Cab")]
+		[Description("German Cab")]
 		German
 	}
 
@@ -131,5 +135,16 @@ public static class Main {
 		public override void Save(UnityModManager.ModEntry modEntry) {
 			Save(this, modEntry);
 		}
+	}
+
+	// Logger Commands
+	public static void Log(string message) {
+		Instance.Logger.Log(message);
+	}
+	public static void Warning(string message) {
+		Instance.Logger.Warning(message);
+	}
+	public static void Error(string message) {
+		Instance.Logger.Error(message);
 	}
 }

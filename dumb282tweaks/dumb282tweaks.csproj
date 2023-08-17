@@ -31,8 +31,68 @@
 	  <Reference Include="Assembly-CSharp-firstpass">
 	    <HintPath>G:\SteamLibrary\steamapps\common\Derail Valley\DerailValley_Data\Managed\Assembly-CSharp-firstpass.dll</HintPath>
 	  </Reference>
+	  <Reference Include="DV.BrakeSystem">
+	    <HintPath>G:\SteamLibrary\steamapps\common\Derail Valley\DerailValley_Data\Managed\DV.BrakeSystem.dll</HintPath>
+	  </Reference>
+	  <Reference Include="DV.Common">
+	    <HintPath>G:\SteamLibrary\steamapps\common\Derail Valley\DerailValley_Data\Managed\DV.Common.dll</HintPath>
+	  </Reference>
+	  <Reference Include="DV.ControllerAnchors">
+	    <HintPath>G:\SteamLibrary\steamapps\common\Derail Valley\DerailValley_Data\Managed\DV.ControllerAnchors.dll</HintPath>
+	  </Reference>
+	  <Reference Include="DV.Highlighting">
+	    <HintPath>G:\SteamLibrary\steamapps\common\Derail Valley\DerailValley_Data\Managed\DV.Highlighting.dll</HintPath>
+	  </Reference>
+	  <Reference Include="DV.Interaction">
+	    <HintPath>G:\SteamLibrary\steamapps\common\Derail Valley\DerailValley_Data\Managed\DV.Interaction.dll</HintPath>
+	  </Reference>
+	  <Reference Include="DV.Inventory">
+	    <HintPath>G:\SteamLibrary\steamapps\common\Derail Valley\DerailValley_Data\Managed\DV.Inventory.dll</HintPath>
+	  </Reference>
+	  <Reference Include="DV.Localization">
+	    <HintPath>G:\SteamLibrary\steamapps\common\Derail Valley\DerailValley_Data\Managed\DV.Localization.dll</HintPath>
+	  </Reference>
+	  <Reference Include="DV.NAudio">
+	    <HintPath>G:\SteamLibrary\steamapps\common\Derail Valley\DerailValley_Data\Managed\DV.NAudio.dll</HintPath>
+	  </Reference>
+	  <Reference Include="DV.PointSet">
+	    <HintPath>G:\SteamLibrary\steamapps\common\Derail Valley\DerailValley_Data\Managed\DV.PointSet.dll</HintPath>
+	  </Reference>
+	  <Reference Include="DV.RadioPlayer">
+	    <HintPath>G:\SteamLibrary\steamapps\common\Derail Valley\DerailValley_Data\Managed\DV.RadioPlayer.dll</HintPath>
+	  </Reference>
+	  <Reference Include="DV.Scenarios.CRUD">
+	    <HintPath>G:\SteamLibrary\steamapps\common\Derail Valley\DerailValley_Data\Managed\DV.Scenarios.CRUD.dll</HintPath>
+	  </Reference>
+	  <Reference Include="DV.Simulation">
+	    <HintPath>G:\SteamLibrary\steamapps\common\Derail Valley\DerailValley_Data\Managed\DV.Simulation.dll</HintPath>
+	  </Reference>
+	  <Reference Include="DV.Telemetry">
+	    <HintPath>G:\SteamLibrary\steamapps\common\Derail Valley\DerailValley_Data\Managed\DV.Telemetry.dll</HintPath>
+	  </Reference>
+	  <Reference Include="DV.TerrainSystem">
+	    <HintPath>G:\SteamLibrary\steamapps\common\Derail Valley\DerailValley_Data\Managed\DV.TerrainSystem.dll</HintPath>
+	  </Reference>
+	  <Reference Include="DV.TerrainTools">
+	    <HintPath>G:\SteamLibrary\steamapps\common\Derail Valley\DerailValley_Data\Managed\DV.TerrainTools.dll</HintPath>
+	  </Reference>
+	  <Reference Include="DV.ThingTypes">
+	    <HintPath>G:\SteamLibrary\steamapps\common\Derail Valley\DerailValley_Data\Managed\DV.ThingTypes.dll</HintPath>
+	  </Reference>
+	  <Reference Include="DV.UI">
+	    <HintPath>G:\SteamLibrary\steamapps\common\Derail Valley\DerailValley_Data\Managed\DV.UI.dll</HintPath>
+	  </Reference>
+	  <Reference Include="DV.UIFramework">
+	    <HintPath>G:\SteamLibrary\steamapps\common\Derail Valley\DerailValley_Data\Managed\DV.UIFramework.dll</HintPath>
+	  </Reference>
+	  <Reference Include="DV.UserManagement">
+	    <HintPath>G:\SteamLibrary\steamapps\common\Derail Valley\DerailValley_Data\Managed\DV.UserManagement.dll</HintPath>
+	  </Reference>
 	  <Reference Include="DV.Utils">
 	    <HintPath>G:\SteamLibrary\steamapps\common\Derail Valley\DerailValley_Data\Managed\DV.Utils.dll</HintPath>
+	  </Reference>
+	  <Reference Include="DV.WeatherSystem">
+	    <HintPath>G:\SteamLibrary\steamapps\common\Derail Valley\DerailValley_Data\Managed\DV.WeatherSystem.dll</HintPath>
 	  </Reference>
 	  <Reference Include="UnityEngine">
 	    <HintPath>G:\SteamLibrary\steamapps\common\Derail Valley\DerailValley_Data\Managed\UnityEngine.dll</HintPath>
