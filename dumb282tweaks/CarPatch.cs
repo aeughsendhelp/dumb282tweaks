@@ -22,30 +22,37 @@ class CarPatch {
 			Material s282Mat = s282Body.GetComponent<MeshRenderer>().material;
 			s282Body.gameObject.SetActive(false);
 
-			if(Main.Settings.regularBody) {
-				GameObject s282BodyNew = UnityEngine.Object.Instantiate(s282BodyLoad);
+			// Load Base
+			Log("Help Please Send Help");
 
-				s282BodyNew.transform.GetChild(0).GetComponent<MeshRenderer>().material = s282Mat;
+			GameObject s282BodyNew = UnityEngine.Object.Instantiate(baseLoad);
+			s282BodyNew.transform.GetChild(0).GetComponent<MeshRenderer>().material = s282Mat;
+			s282BodyNew.transform.parent = __instance.transform;
+			s282BodyNew.transform.localPosition = new Vector3(0, 0, 4.896f);
+			s282BodyNew.transform.localRotation = Quaternion.identity;
+			Log("SEND MORE HELP");
 
-				s282BodyNew.transform.parent = __instance.transform;
-				s282BodyNew.transform.localPosition = new Vector3(0, -0.13f, 6.98f);
-				s282BodyNew.transform.localRotation = Quaternion.identity;
+			/*
+			// Boiler Type
+			switch(Main.Settings.boilerType) {
+				case Settings.BoilerType.Default:
+					GameObject defaultBoiler = UnityEngine.Object.Instantiate(defaultBoilerLoad);
+
+					defaultBoiler.transform.GetChild(0).GetComponent<MeshRenderer>().material = s282Mat;
+					defaultBoiler.transform.parent = __instance.transform;
+					defaultBoiler.transform.localPosition = new Vector3(0, 2.15f, 5.1f);
+					defaultBoiler.transform.localRotation = Quaternion.identity;
+					break;
+				case Settings.BoilerType.Streamlined:
+					GameObject streamlinedBoiler = UnityEngine.Object.Instantiate(streamlineBoilerLoad);
+
+					streamlinedBoiler.transform.GetChild(0).GetComponent<MeshRenderer>().material = s282Mat;
+					streamlinedBoiler.transform.parent = __instance.transform;
+					streamlinedBoiler.transform.localPosition = new Vector3(0, 2.15f, 5.1f);
+					streamlinedBoiler.transform.localRotation = Quaternion.identity;
+					break;
 			}
-
-			//switch(Main.Settings.boilerType) {
-			//	case Settings.BoilerType.Default:
-			//		break;
-			//	case Settings.BoilerType.Streamlined:
-			//		GameObject streamlinedBoiler = UnityEngine.Object.Instantiate(streamlineLoad);
-
-			//		streamlinedBoiler.transform.GetChild(0).GetComponent<MeshRenderer>().material = s282Mat;
-
-			//		streamlinedBoiler.transform.parent = __instance.transform;
-			//		streamlinedBoiler.transform.localPosition = new Vector3(0, 2.15f, 5.1f);
-			//		streamlinedBoiler.transform.localRotation = Quaternion.identity;
-			//		break;
-			//}
-
+			
 			// Cab Type
 			switch(Main.Settings.cabType) {
 				case Settings.CabType.Default:
@@ -73,7 +80,7 @@ class CarPatch {
 					//externalInteractables.gameObject.SetActive(false);
 					break;
 			}
-
+			*/
 			// Smoke Deflector
 			switch(Main.Settings.smokeDeflectorType) {
 				case Settings.SmokeDeflectorType.None:
@@ -87,7 +94,7 @@ class CarPatch {
 					witteSmokeDeflector.transform.GetChild(3).GetComponent<MeshRenderer>().material = s282Mat;
 
 					witteSmokeDeflector.transform.parent = __instance.transform;
-					witteSmokeDeflector.transform.localPosition = new Vector3(0, -0.15f, 6.9f);
+					witteSmokeDeflector.transform.localPosition = new Vector3(0, 0, 4.896f);
 					witteSmokeDeflector.transform.localRotation = Quaternion.identity;
 					Log("witte");
 					if(Main.Settings.bluetooth) {
@@ -102,12 +109,12 @@ class CarPatch {
 					wagnerSmokeDeflector.transform.GetChild(1).GetComponent<MeshRenderer>().material = s282Mat;
 
 					wagnerSmokeDeflector.transform.parent = __instance.transform;
-					wagnerSmokeDeflector.transform.localPosition = new Vector3(0, -0.15f, 6.98f);
+					wagnerSmokeDeflector.transform.localPosition = new Vector3(0, 0, 4.896f);
 					wagnerSmokeDeflector.transform.localRotation = Quaternion.identity;
 					Log("witten't");
 					break;
 			}
-
+			
 			// Smoke Stack
 			switch(Main.Settings.smokeStackType) {
 				case Settings.SmokeStackType.Default:
@@ -116,7 +123,7 @@ class CarPatch {
 					defaultSmokeStack.transform.GetChild(0).GetComponent<MeshRenderer>().material = s282Mat;
 
 					defaultSmokeStack.transform.parent = __instance.transform;
-					defaultSmokeStack.transform.localPosition = new Vector3(0, -0.15f, 6.98f);
+					defaultSmokeStack.transform.localPosition = new Vector3(0, 0, 4.896f);
 					defaultSmokeStack.transform.localRotation = Quaternion.identity;
 					break;
 				case Settings.SmokeStackType.Short:
@@ -125,21 +132,12 @@ class CarPatch {
 					shortSmokeStack.transform.GetChild(0).GetComponent<MeshRenderer>().material = s282Mat;
 
 					shortSmokeStack.transform.parent = __instance.transform;
-					shortSmokeStack.transform.localPosition = new Vector3(0, -0.15f, 6.98f);
+					shortSmokeStack.transform.localPosition = new Vector3(0, 0, 4.896f);
 					shortSmokeStack.transform.localRotation = Quaternion.identity;
 					break;
 			}
-
+			/*
 			// Extras
-			if(Main.Settings.cowCatcher) {
-				GameObject cowCatcher = UnityEngine.Object.Instantiate(cowCatcherLoad);
-
-				cowCatcher.transform.GetChild(0).GetComponent<MeshRenderer>().material = s282Mat;
-
-				cowCatcher.transform.parent = __instance.transform;
-				cowCatcher.transform.localPosition = new Vector3(0, -0.15f, 6.98f);
-				cowCatcher.transform.localRotation = Quaternion.identity;
-			}
 			if(Main.Settings.frontCover) {
 				GameObject frontCover = UnityEngine.Object.Instantiate(frontCoverLoad);
 
@@ -167,6 +165,7 @@ class CarPatch {
 				walkway.transform.localPosition = new Vector3(0, -0.15f, 6.98f);
 				walkway.transform.localRotation = Quaternion.identity;
 			}
+			*/
 		}
 	}
 }

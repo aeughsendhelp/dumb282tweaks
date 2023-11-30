@@ -10,17 +10,33 @@ using static dumb282tweaks.Settings;
 namespace dumb282tweaks;
 
 public static class Settings {
-	public enum CabType {
-		[Description("Default 282 Cab")]
+	public enum Preset {
+		[Description("Default")]
 		Default,
-		[Description("German Cab")]
-		German
+		[Description("Streamlined")]
+		Streamlined
 	}
 	public enum BoilerType {
 		[Description("Default Boiler")]
 		Default,
 		[Description("Streamlined Boiler")]
+		Streamlined
+	}
+	public enum CabType {
+		[Description("Default 282 Cab")]
+		Default,
+		[Description("Default 282 Cab")]
+		Better,
+		[Description("German Cab")]
+		German
+	}
+	public enum CowCatcherType {
+		[Description("Default 282 Cab")]
+		Default,
+		[Description("German Cab")]
 		Streamlined,
+		[Description("No Cab")]
+		None
 	}
 	public enum SmokeDeflectorType {
 		[Description("No Smoke Deflectors")]
@@ -28,25 +44,27 @@ public static class Settings {
 		[Description("Witte Smoke Deflectors")]
 		Witte,
 		[Description("Wagner Smoke Deflectors")]
-		Wagner,
+		Wagner
 	}
 	public enum SmokeStackType {
 		[Description("Default Smoke Stack")]
 		Default,
 		[Description("Short Smoke Stack")]
 		Short,
+		[Description("Balloon Smoke Stack")]
+		Balloon
 	}
 }
 
 public class dumb282tweaksSettings : UnityModManager.ModSettings {
+	public BoilerType boilerType = BoilerType.Default;
+	public CabType cabType = CabType.Better;
+	public CowCatcherType cowCatcherType = CowCatcherType.Default;
+	public SmokeDeflectorType smokeDeflectorType = SmokeDeflectorType.Wagner;
+	public SmokeStackType smokeStackType = SmokeStackType.Short;
+
 	public bool bluetooth = false;
 	public bool flattensyour282 = false;
-
-	public bool regularBody = true;
-	public BoilerType boilerType = BoilerType.Default;
-	public CabType cabType = CabType.Default;
-	public SmokeDeflectorType smokeDeflectorType = SmokeDeflectorType.Wagner;
-	public SmokeStackType smokeStackType = SmokeStackType.Default;
 
 	public bool cowCatcher = true;
 	public bool frontCover = false;
