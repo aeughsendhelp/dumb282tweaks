@@ -119,8 +119,7 @@
 		<Copy SourceFiles="$(TargetPath)" DestinationFolder="../build/" />
 
 		<!-- Package after Release build -->
-		<Exec Condition="'$(ConfigurationName)' == 'Release' And '$(OS)' == 'Windows_NT'" Command="echo postbuild" />
-		<Exec Condition="'$(ConfigurationName)' == 'Release' And '$(OS)' != 'Windows_NT'" Command="pwsh -Command &quot;(../package.ps1)&quot;" />
+		<Exec Command="powershell -executionpolicy bypass D:\Documents\Code\dumb282tweaks\sendtomods.ps1" />
 	</Target>
 
 	<Target Name="PreBuild" BeforeTargets="PreBuildEvent">
