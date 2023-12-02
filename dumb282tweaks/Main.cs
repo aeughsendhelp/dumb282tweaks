@@ -66,9 +66,9 @@ public static class Main {
 	[AllowNull] public static GameObject shortSmokeStackLoad;
 	[AllowNull] public static GameObject balloonSmokeStackLoad;
 	// Extras
-	[AllowNull] public static GameObject frontCoverLoad;
 	[AllowNull] public static GameObject railingsLoad;
 	[AllowNull] public static GameObject walkwayLoad;
+	[AllowNull] public static GameObject frontCoverLoad;
 
 
 	// Load
@@ -114,9 +114,9 @@ public static class Main {
 		Settings.smokeStackType = (Settings.SmokeStackType) GUILayout.SelectionGrid((int) Settings.smokeStackType, smokeStackTypeTexts, 1, "toggle");
 
 		GUILayout.Label("Extras");
-		Settings.frontCover = GUILayout.Toggle(Settings.frontCover, "Front Cover");
 		Settings.railings = GUILayout.Toggle(Settings.railings, "Railings");
 		Settings.walkway = GUILayout.Toggle(Settings.walkway, "Walkway");
+		Settings.frontCover = GUILayout.Toggle(Settings.frontCover, "Front Cover");
 
 		GUILayout.EndVertical();
 	}

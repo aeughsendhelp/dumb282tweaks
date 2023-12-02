@@ -22,10 +22,29 @@ class CarPatch {
 			originalBody.gameObject.SetActive(false);
 
 			GameObject baseReal = InstantiateLoadedObject(baseLoad, s282Mat, __instance.transform);
-			GameObject defaultBoiler = InstantiateLoadedObject(defaultBoilerLoad, s282Mat, __instance.transform);
-			GameObject defaultCab = InstantiateLoadedObject(defaultCabLoad, s282Mat, __instance.transform);
 
-
+			// Boiler
+			switch(Main.Settings.boilerType) {
+				case Settings.BoilerType.Default:
+					GameObject defaultBoiler = InstantiateLoadedObject(defaultBoilerLoad, s282Mat, __instance.transform);
+					break;
+				case Settings.BoilerType.Streamlined:
+					GameObject streamlineBoiler = InstantiateLoadedObject(streamlineBoilerLoad, s282Mat, __instance.transform);
+					break;
+			}
+			// Cab
+			switch(Main.Settings.cabType) {
+				case Settings.CabType.Default:
+					GameObject defaultCab = InstantiateLoadedObject(defaultCabLoad, s282Mat, __instance.transform);
+					break;
+				case Settings.CabType.Better:
+					GameObject betterCab = InstantiateLoadedObject(betterCabLoad, s282Mat, __instance.transform);
+					break;
+				case Settings.CabType.German:
+					GameObject germanCab = InstantiateLoadedObject(germanCabLoad, s282Mat, __instance.transform);
+					break;
+			}
+			// Cow Catchers
 			switch(Main.Settings.cowCatcherType) {
 				case Settings.CowCatcherType.Default:
 					GameObject defaultCowCatcher = InstantiateLoadedObject(defaultCowCatcherLoad, s282Mat, __instance.transform);
@@ -35,6 +54,15 @@ class CarPatch {
 					break;
 				case Settings.CowCatcherType.Streamlined:
 					GameObject streamlinedCowCatcher = InstantiateLoadedObject(streamlinedCowCatcherLoad, s282Mat, __instance.transform);
+					break;
+			}
+			// Smoke Box Door
+			switch(Main.Settings.smokeBoxDoorType) {
+				case Settings.SmokeBoxDoorType.Default:
+					GameObject defaultSmokeBoxDoor = InstantiateLoadedObject(defaultSmokeBoxDoorLoad, s282Mat, __instance.transform);
+					break;
+				case Settings.SmokeBoxDoorType.Center:
+					GameObject frontSmokeBoxDoor = InstantiateLoadedObject(frontSmokeBoxDoorLoad, s282Mat, __instance.transform);
 					break;
 			}
 			// Smoke Deflectors
@@ -59,6 +87,16 @@ class CarPatch {
 				case Settings.SmokeStackType.Balloon:
 					GameObject balloonSmokeStack = InstantiateLoadedObject(balloonSmokeStackLoad, s282Mat, __instance.transform);
 					break;
+			}
+			// Extras
+			if(Main.Settings.railings) {
+				GameObject railings = InstantiateLoadedObject(railingsLoad, s282Mat, __instance.transform);
+			}
+			if(Main.Settings.walkway) {
+				GameObject walkways = InstantiateLoadedObject(walkwayLoad, s282Mat, __instance.transform);
+			}
+			if(Main.Settings.frontCover) {
+				GameObject frontCover = InstantiateLoadedObject(frontCoverLoad, s282Mat, __instance.transform);
 			}
 		}
 	}
