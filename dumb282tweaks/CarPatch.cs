@@ -16,10 +16,16 @@ class CarPatch {
 		if(__instance != null && __instance.carType == TrainCarType.LocoSteamHeavy) {
 			// This is a terrible way to get the mesh of the locomotive since a simple gameobject reordering will break it, but it's alright for now. If something breaks, just note that this is likely the reason
 			Transform originalBody = __instance.transform.GetChild(5).transform.GetChild(0).transform.GetChild(0);
+			//Transform originalSmokeBoxDoor = __instance.transform.GetChild(5).transform.GetChild(0).transform.GetChild(7);
+			//Transform originalHeadlights = __instance.transform.GetChild(5).transform.GetChild(13);
+
+
 			// This is a better way of getting the mesh, but I don't feel like trying to understand transform.Find, so I'll come back this later. I think the directory with slashes needs to be exactly parents and children, no skipping levels
 			//Transform s282Mesh = carInstance.transform.Find("LocoS282A_Body/s282_locomotive_body");
 			Material s282Mat = originalBody.GetComponent<MeshRenderer>().material;
 			originalBody.gameObject.SetActive(false);
+			//originalSmokeBoxDoor.gameObject.SetActive(false);
+			//originalHeadlights.gameObject.SetActive(false);
 
 			GameObject baseReal = InstantiateLoadedObject(baseLoad, s282Mat, __instance.transform);
 
@@ -39,6 +45,8 @@ class CarPatch {
 					break;
 				case Settings.CabType.Better:
 					GameObject betterCab = InstantiateLoadedObject(betterCabLoad, s282Mat, __instance.transform);
+
+					//GameObject betterCabInterior = InstantiateLoadedObject(betterInteriorLoad, s282Mat, __instance.transform);
 					break;
 				case Settings.CabType.German:
 					GameObject germanCab = InstantiateLoadedObject(germanCabLoad, s282Mat, __instance.transform);
@@ -56,15 +64,15 @@ class CarPatch {
 					GameObject streamlinedCowCatcher = InstantiateLoadedObject(streamlinedCowCatcherLoad, s282Mat, __instance.transform);
 					break;
 			}
-			// Smoke Box Door
-			switch(Main.Settings.smokeBoxDoorType) {
-				case Settings.SmokeBoxDoorType.Default:
-					GameObject defaultSmokeBoxDoor = InstantiateLoadedObject(defaultSmokeBoxDoorLoad, s282Mat, __instance.transform);
-					break;
-				case Settings.SmokeBoxDoorType.Center:
-					GameObject frontSmokeBoxDoor = InstantiateLoadedObject(frontSmokeBoxDoorLoad, s282Mat, __instance.transform);
-					break;
-			}
+			//// Smoke Box Door
+			//switch(Main.Settings.smokeBoxDoorType) {
+			//	case Settings.SmokeBoxDoorType.Default:
+			//		GameObject defaultSmokeBoxDoor = InstantiateLoadedObject(defaultSmokeBoxDoorLoad, s282Mat, __instance.transform);
+			//		break;
+			//	case Settings.SmokeBoxDoorType.Center:
+			//		GameObject frontSmokeBoxDoor = InstantiateLoadedObject(frontSmokeBoxDoorLoad, s282Mat, __instance.transform);
+			//		break;
+			//}
 			// Smoke Deflectors
 			switch(Main.Settings.smokeDeflectorType) {
 				case Settings.SmokeDeflectorType.None:
@@ -99,18 +107,5 @@ class CarPatch {
 				GameObject frontCover = InstantiateLoadedObject(frontCoverLoad, s282Mat, __instance.transform);
 			}
 		}
-	}
-
-	static GameObject InstantiateLoadedObject(GameObject toLoad, Material mat, Transform toParent) {
-		GameObject obj = UnityEngine.Object.Instantiate(toLoad);
-
-		for (int i = 0; i < obj.transform.childCount; i++) {
-			obj.transform.GetChild(i).GetComponent<MeshRenderer>().material = mat;
-		}
-
-		obj.transform.parent = toParent;
-		obj.transform.localPosition = new Vector3(0, 0, 4.887f);
-		obj.transform.localRotation = Quaternion.identity;
-		return obj;
 	}
 }

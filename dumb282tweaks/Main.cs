@@ -5,6 +5,8 @@ using HarmonyLib;
 using UnityModManagerNet;
 using UnityEngine;
 using System.Diagnostics.CodeAnalysis;
+using System.ComponentModel;
+using static dumb282tweaks.Settings;
 
 namespace dumb282tweaks;
 
@@ -13,29 +15,35 @@ public static class Main {
 	[AllowNull] public static UnityModManager.ModEntry Instance { get; private set; }
 	[AllowNull] public static dumb282tweaksSettings Settings { get; private set; }
 
-
 	public static readonly string[] boilerTypeTexts = new[] {
 		"Default",
-		"Streamlined"
+		"Streamlined",
+		"Chonky"
 	};
 	public static readonly string[] cabTypeTexts = new[] {
 		"Default",
+		"Better",
 		"German"
-	};
-	public static readonly string[] smokeDeflectorTypeTexts = new[] {
-		"None",
-		"Witte",
-		"Wagner"
-	};
-	public static readonly string[] smokeStackTypeTexts = new[] {
-		"Default",
-		"Short",
-		"Balloon",
 	};
 	public static readonly string[] cowCatcherTypeTexts = new[] {
 		"Default",
 		"Streamlined",
 		"None",
+	};
+	public static readonly string[] smokeBoxDoorType = new[] {
+		"Default",
+		"Center"
+	};
+	public static readonly string[] smokeDeflectorTypeTexts = new[] {
+		"None",
+		"Witte",
+		"Wagner",
+		"Ching Chong" // please dont cancel me on twitter (i dont use twitter)
+	};
+	public static readonly string[] smokeStackTypeTexts = new[] {
+		"Default",
+		"Short",
+		"Balloon",
 	};
 
 	// Base
@@ -103,15 +111,17 @@ public static class Main {
 		GUILayout.Label("Also, reloading a save will currently break things and the tweaks won't load. This isn't good.");
 
 		GUILayout.Label("Boiler Type");
-		Settings.boilerType = (Settings.BoilerType) GUILayout.SelectionGrid((int) Settings.boilerType, boilerTypeTexts, 1, "toggle");
+		Settings.boilerType = (BoilerType) GUILayout.SelectionGrid((int) Settings.boilerType, boilerTypeTexts, 1, "toggle");
 		GUILayout.Label("Cab Type");
-		Settings.cabType = (Settings.CabType) GUILayout.SelectionGrid((int) Settings.cabType, cabTypeTexts, 1, "toggle");
+		Settings.cabType = (CabType) GUILayout.SelectionGrid((int) Settings.cabType, cabTypeTexts, 1, "toggle");
 		GUILayout.Label("Cow Catcher Type");
-		Settings.cowCatcherType = (Settings.CowCatcherType) GUILayout.SelectionGrid((int) Settings.cowCatcherType, cowCatcherTypeTexts, 1, "toggle");
+		Settings.cowCatcherType = (CowCatcherType) GUILayout.SelectionGrid((int) Settings.cowCatcherType, cowCatcherTypeTexts, 1, "toggle");
 		GUILayout.Label("Smoke Deflector Type");
-		Settings.smokeDeflectorType = (Settings.SmokeDeflectorType) GUILayout.SelectionGrid((int) Settings.smokeDeflectorType, smokeDeflectorTypeTexts, 1, "toggle");
+		Settings.smokeDeflectorType = (SmokeDeflectorType) GUILayout.SelectionGrid((int) Settings.smokeDeflectorType, smokeDeflectorTypeTexts, 1, "toggle");
+		GUILayout.Label("Smoke Box Door Type");
+		Settings.smokeBoxDoorType = (SmokeBoxDoorType) GUILayout.SelectionGrid((int) Settings.smokeBoxDoorType, smokeBoxDoorType, 1, "toggle");
 		GUILayout.Label("Smoke Stack Type");
-		Settings.smokeStackType = (Settings.SmokeStackType) GUILayout.SelectionGrid((int) Settings.smokeStackType, smokeStackTypeTexts, 1, "toggle");
+		Settings.smokeStackType = (SmokeStackType) GUILayout.SelectionGrid((int) Settings.smokeStackType, smokeStackTypeTexts, 1, "toggle");
 
 		GUILayout.Label("Extras");
 		Settings.railings = GUILayout.Toggle(Settings.railings, "Railings");
@@ -126,58 +136,70 @@ public static class Main {
 
 	static void LoadAllAssets() {
 		// Base
-		AssetBundle baseReal = LoadAssetBundle("base"); // I can't call it base because that's a thing from c#, idk what it does
-		baseLoad = LoadAssetFromBundle(baseReal, "Assets/Base.prefab");
+		AssetBundle baseReal = LoadAssetBundle("base"); // I can't call it base because that's a c# thing or smth
+		baseLoad = LoadAssetFromBundle(baseReal, "Base.prefab");
 		// Boilers
 		AssetBundle boilers = LoadAssetBundle("boilers");
-		defaultBoilerLoad = LoadAssetFromBundle(boilers, "Assets/DefaultBoiler.prefab");
-		//streamlineBoilerLoad = LoadAssetBundle("boilers", "Assets/StreamlineBoiler.prefab");
+		defaultBoilerLoad = LoadAssetFromBundle(boilers, "DefaultBoiler.prefab");
+		//streamlineBoilerLoad = LoadAssetBundle("boilers", "StreamlineBoiler.prefab");
 		// Cabs
 		AssetBundle cabs = LoadAssetBundle("cabs");
-		defaultCabLoad = LoadAssetFromBundle(cabs, "Assets/DefaultCab.prefab");
-		betterCabLoad = LoadAssetFromBundle(cabs, "Assets/BetterCab.prefab");
-		germanCabLoad = LoadAssetFromBundle(cabs, "Assets/GermanCab.prefab");
+		defaultCabLoad = LoadAssetFromBundle(cabs, "DefaultCab.prefab");
+		betterCabLoad = LoadAssetFromBundle(cabs, "BetterCab.prefab");
+		germanCabLoad = LoadAssetFromBundle(cabs, "GermanCab.prefab");
 		// Cowcatchers
 		AssetBundle cowCatchers = LoadAssetBundle("cowcatchers");
-		defaultCowCatcherLoad = LoadAssetFromBundle(cowCatchers, "Assets/DefaultCowCatcher.prefab");
-		noCowCatcherLoad = LoadAssetFromBundle(cowCatchers, "Assets/NoCowCatcher.prefab");
-		streamlinedCowCatcherLoad = LoadAssetFromBundle(cowCatchers, "Assets/StreamlinedCowCatcher.prefab");
+		defaultCowCatcherLoad = LoadAssetFromBundle(cowCatchers, "DefaultCowCatcher.prefab");
+		noCowCatcherLoad = LoadAssetFromBundle(cowCatchers, "NoCowCatcher.prefab");
+		streamlinedCowCatcherLoad = LoadAssetFromBundle(cowCatchers, "StreamlinedCowCatcher.prefab");
 		// Interiors
-		//AssetBundle interiors = LoadAssetBundle("interiors");
-		//defaultInteriorLoad = LoadAssetFromBundle(interiors, "Assets/Base.prefab");
-		//betterInteriorLoad = LoadAssetFromBundle(interiors, "Assets/Base.prefab");
+		AssetBundle interiors = LoadAssetBundle("interiors");
+		defaultInteriorLoad = LoadAssetFromBundle(interiors, "DefaultInterior.prefab");
+		betterInteriorLoad = LoadAssetFromBundle(interiors, "BetterInterior.prefab");
 		// Smoke Box Door
 		AssetBundle smokeBoxDoor = LoadAssetBundle("smokeboxdoors");
-		defaultSmokeBoxDoorLoad = LoadAssetFromBundle(smokeBoxDoor, "Assets/DefaultSmokeBoxDoor.prefab");
-		frontSmokeBoxDoorLoad = LoadAssetFromBundle(smokeBoxDoor, "Assets/FrontSmokeBoxDoor.prefab");
+		defaultSmokeBoxDoorLoad = LoadAssetFromBundle(smokeBoxDoor, "DefaultSmokeBoxDoor.prefab");
+		frontSmokeBoxDoorLoad = LoadAssetFromBundle(smokeBoxDoor, "FrontSmokeBoxDoor.prefab");
 		// Smoke Deflectors
 		AssetBundle smokeDeflectors = LoadAssetBundle("smokedeflectors");
-		wagnerSmokeDeflectorsLoad = LoadAssetFromBundle(smokeDeflectors, "Assets/WagnerSmokeDeflectors.prefab");
-		witteSmokeDeflectorsLoad = LoadAssetFromBundle(smokeDeflectors, "Assets/WitteSmokeDeflectors.prefab");
-		// chineseSmokeDeflectorsLoad = LoadAssetFromBundle("smokedeflectors", "Assets/ChineseSmokeDeflectors.prefab");
+		wagnerSmokeDeflectorsLoad = LoadAssetFromBundle(smokeDeflectors, "WagnerSmokeDeflectors.prefab");
+		witteSmokeDeflectorsLoad = LoadAssetFromBundle(smokeDeflectors, "WitteSmokeDeflectors.prefab");
+		// chineseSmokeDeflectorsLoad = LoadAssetFromBundle("smokedeflectors", "ChineseSmokeDeflectors.prefab");
 		// Smoke Stacks
 		AssetBundle smokeStacks = LoadAssetBundle("smokestacks");
-		defaultSmokeStackLoad = LoadAssetFromBundle(smokeStacks, "Assets/DefaultSmokeStack.prefab");
-		shortSmokeStackLoad = LoadAssetFromBundle(smokeStacks, "Assets/ShortSmokeStack.prefab");
-		balloonSmokeStackLoad = LoadAssetFromBundle(smokeStacks, "Assets/BalloonSmokeStack.prefab");
+		defaultSmokeStackLoad = LoadAssetFromBundle(smokeStacks, "DefaultSmokeStack.prefab");
+		shortSmokeStackLoad = LoadAssetFromBundle(smokeStacks, "ShortSmokeStack.prefab");
+		balloonSmokeStackLoad = LoadAssetFromBundle(smokeStacks, "BalloonSmokeStack.prefab");
 		// Extras
 		AssetBundle extras = LoadAssetBundle("extras");
-		frontCoverLoad = LoadAssetFromBundle(extras, "Assets/FrontCover.prefab");
-		railingsLoad = LoadAssetFromBundle(extras, "Assets/Railings.prefab");
-		walkwayLoad = LoadAssetFromBundle(extras, "Assets/Walkways.prefab");
+		frontCoverLoad = LoadAssetFromBundle(extras, "FrontCover.prefab");
+		railingsLoad = LoadAssetFromBundle(extras, "Railings.prefab");
+		walkwayLoad = LoadAssetFromBundle(extras, "Walkways.prefab");
 	}
 
 	public static AssetBundle LoadAssetBundle(string assetBundle) {
 		string assetPath = Path.Combine(Instance.Path.ToString(), "assets");
-		Instance.Logger.Log("i sexed benny");
 
 		AssetBundle loadedBundle = AssetBundle.LoadFromFile(Path.Combine(assetPath, assetBundle));
 		return loadedBundle;
 	}
 
-	public static GameObject LoadAssetFromBundle(AssetBundle assetBundle, String directory) {
-		GameObject loadedObject = assetBundle.LoadAsset<GameObject>(directory);
+	public static GameObject LoadAssetFromBundle(AssetBundle assetBundle, String assetName) {
+		GameObject loadedObject = assetBundle.LoadAsset<GameObject>("Assets/" + assetName);
 		return loadedObject;
+	}
+
+	public static GameObject InstantiateLoadedObject(GameObject toLoad, Material mat, Transform toParent) {
+		GameObject obj = UnityEngine.Object.Instantiate(toLoad);
+
+		for(int i = 0; i < obj.transform.childCount; i++) {
+			obj.transform.GetChild(i).GetComponent<MeshRenderer>().material = mat;
+		}
+
+		obj.transform.parent = toParent;
+		obj.transform.localPosition = new Vector3(0, 0, 4.887f);
+		obj.transform.localRotation = Quaternion.identity;
+		return obj;
 	}
 
 	// Logger Commands

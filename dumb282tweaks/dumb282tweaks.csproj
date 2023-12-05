@@ -4,114 +4,64 @@
 		<TargetFramework>net48</TargetFramework>
 		<LangVersion>latest</LangVersion>
 		<Nullable>enable</Nullable>
-		<WarningsAsErrors>CS8600;CS8602;CS8603</WarningsAsErrors>
 	</PropertyGroup>
 
+	<ItemGroup>
+		<PackageReference Include="Krafs.Publicizer" Version="2.2.1" />
+		<Publicize Include="Assembly-CSharp" IncludeCompilerGeneratedMembers="false" />
+		<Publicize Include="DV.CharacterController" IncludeCompilerGeneratedMembers="false" />
+		<Publicize Include="DV.Simulation" IncludeCompilerGeneratedMembers="false" />
+		<Publicize Include="DV.Utils:DV.Utils.SingletonBehaviour`1._instance" />
+	</ItemGroup>
+
 	<!-- Derail Valley -->
+	<ItemGroup>
+		<Reference Include="Assembly-CSharp" />
+		<Reference Include="CommandTerminal" />
+		<Reference Include="DV.BrakeSystem" />
+		<Reference Include="DV.CharacterController" />
+		<Reference Include="DV.Common" />
+		<Reference Include="DV.ControllerAnchors" />
+		<Reference Include="DV.Highlighting" />
+		<Reference Include="DV.Interaction" />
+		<Reference Include="DV.Inventory" />
+		<Reference Include="DV.Localization" />
+		<Reference Include="DV.NAudio" />
+		<Reference Include="DV.PointSet" />
+		<Reference Include="DV.RadioPlayer" />
+		<Reference Include="DV.Scenarios.CRUD" />
+		<Reference Include="DV.Simulation" />
+		<Reference Include="DV.Telemetry" />
+		<Reference Include="DV.TerrainSystem" />
+		<Reference Include="DV.TerrainTools" />
+		<Reference Include="DV.ThingTypes" />
+		<Reference Include="DV.UI" />
+		<Reference Include="DV.UIFramework" />
+		<Reference Include="DV.UserManagement" />
+		<Reference Include="DV.Utils" />
+		<Reference Include="DV.WeatherSystem" />
+	</ItemGroup>
 
 	<!-- Unity -->
+	<ItemGroup>
+		<Reference Include="Unity.TextMeshPro" />
+		<Reference Include="UnityEngine" />
+		<Reference Include="UnityEngine.AssetBundleModule" />
+		<Reference Include="UnityEngine.AudioModule" />
+		<Reference Include="UnityEngine.CoreModule" />
+		<Reference Include="UnityEngine.IMGUIModule" />
+		<Reference Include="UnityEngine.JSONSerializeModule" />
+		<Reference Include="UnityEngine.PhysicsModule" />
+		<Reference Include="UnityEngine.UI" />
+	</ItemGroup>
 
 	<!-- Mod Loader -->
 	<ItemGroup>
-		<PackageReference Include="UnityModManager" Version="0.27.2" />
-	</ItemGroup>
+		<PackageReference Include="UnityModManager" Version="0.27.0" />
+		<Reference Include="0Harmony" />
 
-	<!-- Null Checking -->
-	<ItemGroup>
-		<PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
 		<PackageReference Include="Nullable" Version="1.3.1" PrivateAssets="all" />
-	</ItemGroup>
-	<ItemGroup>
-	  <Reference Include="0Harmony">
-	    <HintPath>G:\SteamLibrary\steamapps\common\Derail Valley\DerailValley_Data\Managed\UnityModManager\0Harmony.dll</HintPath>
-	  </Reference>
-	  <Reference Include="Assembly-CSharp">
-	    <HintPath>G:\SteamLibrary\steamapps\common\Derail Valley\DerailValley_Data\Managed\Assembly-CSharp.dll</HintPath>
-	  </Reference>
-	  <Reference Include="Assembly-CSharp-firstpass">
-	    <HintPath>G:\SteamLibrary\steamapps\common\Derail Valley\DerailValley_Data\Managed\Assembly-CSharp-firstpass.dll</HintPath>
-	  </Reference>
-	  <Reference Include="DV.BrakeSystem">
-	    <HintPath>G:\SteamLibrary\steamapps\common\Derail Valley\DerailValley_Data\Managed\DV.BrakeSystem.dll</HintPath>
-	  </Reference>
-	  <Reference Include="DV.Common">
-	    <HintPath>G:\SteamLibrary\steamapps\common\Derail Valley\DerailValley_Data\Managed\DV.Common.dll</HintPath>
-	  </Reference>
-	  <Reference Include="DV.ControllerAnchors">
-	    <HintPath>G:\SteamLibrary\steamapps\common\Derail Valley\DerailValley_Data\Managed\DV.ControllerAnchors.dll</HintPath>
-	  </Reference>
-	  <Reference Include="DV.Highlighting">
-	    <HintPath>G:\SteamLibrary\steamapps\common\Derail Valley\DerailValley_Data\Managed\DV.Highlighting.dll</HintPath>
-	  </Reference>
-	  <Reference Include="DV.Interaction">
-	    <HintPath>G:\SteamLibrary\steamapps\common\Derail Valley\DerailValley_Data\Managed\DV.Interaction.dll</HintPath>
-	  </Reference>
-	  <Reference Include="DV.Inventory">
-	    <HintPath>G:\SteamLibrary\steamapps\common\Derail Valley\DerailValley_Data\Managed\DV.Inventory.dll</HintPath>
-	  </Reference>
-	  <Reference Include="DV.Localization">
-	    <HintPath>G:\SteamLibrary\steamapps\common\Derail Valley\DerailValley_Data\Managed\DV.Localization.dll</HintPath>
-	  </Reference>
-	  <Reference Include="DV.NAudio">
-	    <HintPath>G:\SteamLibrary\steamapps\common\Derail Valley\DerailValley_Data\Managed\DV.NAudio.dll</HintPath>
-	  </Reference>
-	  <Reference Include="DV.PointSet">
-	    <HintPath>G:\SteamLibrary\steamapps\common\Derail Valley\DerailValley_Data\Managed\DV.PointSet.dll</HintPath>
-	  </Reference>
-	  <Reference Include="DV.RadioPlayer">
-	    <HintPath>G:\SteamLibrary\steamapps\common\Derail Valley\DerailValley_Data\Managed\DV.RadioPlayer.dll</HintPath>
-	  </Reference>
-	  <Reference Include="DV.Scenarios.CRUD">
-	    <HintPath>G:\SteamLibrary\steamapps\common\Derail Valley\DerailValley_Data\Managed\DV.Scenarios.CRUD.dll</HintPath>
-	  </Reference>
-	  <Reference Include="DV.Simulation">
-	    <HintPath>G:\SteamLibrary\steamapps\common\Derail Valley\DerailValley_Data\Managed\DV.Simulation.dll</HintPath>
-	  </Reference>
-	  <Reference Include="DV.Telemetry">
-	    <HintPath>G:\SteamLibrary\steamapps\common\Derail Valley\DerailValley_Data\Managed\DV.Telemetry.dll</HintPath>
-	  </Reference>
-	  <Reference Include="DV.TerrainSystem">
-	    <HintPath>G:\SteamLibrary\steamapps\common\Derail Valley\DerailValley_Data\Managed\DV.TerrainSystem.dll</HintPath>
-	  </Reference>
-	  <Reference Include="DV.TerrainTools">
-	    <HintPath>G:\SteamLibrary\steamapps\common\Derail Valley\DerailValley_Data\Managed\DV.TerrainTools.dll</HintPath>
-	  </Reference>
-	  <Reference Include="DV.ThingTypes">
-	    <HintPath>G:\SteamLibrary\steamapps\common\Derail Valley\DerailValley_Data\Managed\DV.ThingTypes.dll</HintPath>
-	  </Reference>
-	  <Reference Include="DV.UI">
-	    <HintPath>G:\SteamLibrary\steamapps\common\Derail Valley\DerailValley_Data\Managed\DV.UI.dll</HintPath>
-	  </Reference>
-	  <Reference Include="DV.UIFramework">
-	    <HintPath>G:\SteamLibrary\steamapps\common\Derail Valley\DerailValley_Data\Managed\DV.UIFramework.dll</HintPath>
-	  </Reference>
-	  <Reference Include="DV.UserManagement">
-	    <HintPath>G:\SteamLibrary\steamapps\common\Derail Valley\DerailValley_Data\Managed\DV.UserManagement.dll</HintPath>
-	  </Reference>
-	  <Reference Include="DV.Utils">
-	    <HintPath>G:\SteamLibrary\steamapps\common\Derail Valley\DerailValley_Data\Managed\DV.Utils.dll</HintPath>
-	  </Reference>
-	  <Reference Include="DV.WeatherSystem">
-	    <HintPath>G:\SteamLibrary\steamapps\common\Derail Valley\DerailValley_Data\Managed\DV.WeatherSystem.dll</HintPath>
-	  </Reference>
-	  <Reference Include="UnityEngine">
-	    <HintPath>G:\SteamLibrary\steamapps\common\Derail Valley\DerailValley_Data\Managed\UnityEngine.dll</HintPath>
-	  </Reference>
-	  <Reference Include="UnityEngine.AssetBundleModule">
-	    <HintPath>G:\SteamLibrary\steamapps\common\Derail Valley\DerailValley_Data\Managed\UnityEngine.AssetBundleModule.dll</HintPath>
-	  </Reference>
-	  <Reference Include="UnityEngine.CoreModule">
-	    <HintPath>G:\SteamLibrary\steamapps\common\Derail Valley\DerailValley_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
-	  </Reference>
-	  <Reference Include="UnityEngine.IMGUIModule">
-	    <HintPath>G:\SteamLibrary\steamapps\common\Derail Valley\DerailValley_Data\Managed\UnityEngine.IMGUIModule.dll</HintPath>
-	  </Reference>
-	  <Reference Include="UnityEngine.UI">
-	    <HintPath>G:\SteamLibrary\steamapps\common\Derail Valley\DerailValley_Data\Managed\UnityEngine.UI.dll</HintPath>
-	  </Reference>
-	  <Reference Include="UnityModManager">
-	    <HintPath>G:\SteamLibrary\steamapps\common\Derail Valley\DerailValley_Data\Managed\UnityModManager\UnityModManager.dll</HintPath>
-	  </Reference>
+		<PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
 	</ItemGroup>
 
 	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
@@ -119,10 +69,7 @@
 		<Copy SourceFiles="$(TargetPath)" DestinationFolder="../build/" />
 
 		<!-- Package after Release build -->
-		<Exec Command="powershell -executionpolicy bypass D:\Documents\Code\dumb282tweaks\sendtomods.ps1" />
-	</Target>
-
-	<Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-	  <Exec Command="echo prebuild" />
+		<Exec Condition="Exists('$(DvInstallDir)') And '$(OS)' == 'Windows_NT'" Command="powershell -executionpolicy bypass -Command &quot;(../package.ps1 -NoArchive -OutputDirectory '$(DvInstallDir)\Mods')&quot;" />
+		<Exec Condition="Exists('$(DvInstallDir)') And '$(OS)' != 'Windows_NT'" Command="pwsh  -Command &quot;(../package.ps1 -NoArchive -OutputDirectory '$(DvInstallDir)/Mods')&quot;" />		<Exec Command="D:\Documents\Code\dumb282tweaks\zDerailValley.url" />
 	</Target>
 </Project>

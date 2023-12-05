@@ -20,12 +20,14 @@ public static class Settings {
 		[Description("Default Boiler")]
 		Default,
 		[Description("Streamlined Boiler")]
-		Streamlined
+		Streamlined,
+		[Description("Chonky Boiler")]
+		Chonky
 	}
 	public enum CabType {
 		[Description("Default 282 Cab")]
 		Default,
-		[Description("Default 282 Cab")]
+		[Description("Better 282 Cab, more like a USRA Mikado")]
 		Better,
 		[Description("German Cab")]
 		German
@@ -50,7 +52,9 @@ public static class Settings {
 		[Description("Witte Smoke Deflectors")]
 		Witte,
 		[Description("Wagner Smoke Deflectors")]
-		Wagner
+		Wagner,
+		[Description("Wagner Smoke Deflectors")]
+		Chinese
 	}
 	public enum SmokeStackType {
 		[Description("Default Smoke Stack")]
@@ -64,7 +68,7 @@ public static class Settings {
 
 public class dumb282tweaksSettings : UnityModManager.ModSettings {
 	public BoilerType boilerType = BoilerType.Default;
-	public CabType cabType = CabType.Better;
+	public CabType cabType = CabType.Default;
 	public CowCatcherType cowCatcherType = CowCatcherType.Default;
 	public SmokeBoxDoorType smokeBoxDoorType = SmokeBoxDoorType.Default;
 	public SmokeDeflectorType smokeDeflectorType = SmokeDeflectorType.Wagner;
