@@ -11,7 +11,8 @@ using static dumb282tweaks.Settings;
 namespace dumb282tweaks;
 
 public static class Main {
-	// Variables
+	static public float objOffset = 4.887f;
+
 	[AllowNull] public static UnityModManager.ModEntry Instance { get; private set; }
 	[AllowNull] public static dumb282tweaksSettings Settings { get; private set; }
 
@@ -38,7 +39,7 @@ public static class Main {
 		"None",
 		"Witte",
 		"Wagner",
-		"Ching Chong" // please dont cancel me on twitter (i dont use twitter)
+		"Chinese"
 	};
 	public static readonly string[] smokeStackTypeTexts = new[] {
 		"Default",
@@ -51,6 +52,7 @@ public static class Main {
 	// Boilers
 	[AllowNull] public static GameObject defaultBoilerLoad;
 	[AllowNull] public static GameObject streamlineBoilerLoad;
+	[AllowNull] public static GameObject chonkyBoilerLoad;
 	// Cabs
 	[AllowNull] public static GameObject defaultCabLoad;
 	[AllowNull] public static GameObject betterCabLoad;
@@ -64,7 +66,7 @@ public static class Main {
 	[AllowNull] public static GameObject betterInteriorLoad;
 	// Smoke Box Door
 	[AllowNull] public static GameObject defaultSmokeBoxDoorLoad;
-	[AllowNull] public static GameObject frontSmokeBoxDoorLoad; // this is a dumb name but i dont want it to get too verbose so this works
+	[AllowNull] public static GameObject centerSmokeBoxDoorLoad;
 	// Smoke Deflectors
 	[AllowNull] public static GameObject wagnerSmokeDeflectorsLoad;
 	[AllowNull] public static GameObject witteSmokeDeflectorsLoad;
@@ -77,7 +79,6 @@ public static class Main {
 	[AllowNull] public static GameObject railingsLoad;
 	[AllowNull] public static GameObject walkwayLoad;
 	[AllowNull] public static GameObject frontCoverLoad;
-
 
 	// Load
 	private static bool Load(UnityModManager.ModEntry modEntry) {
@@ -141,7 +142,9 @@ public static class Main {
 		// Boilers
 		AssetBundle boilers = LoadAssetBundle("boilers");
 		defaultBoilerLoad = LoadAssetFromBundle(boilers, "DefaultBoiler.prefab");
-		//streamlineBoilerLoad = LoadAssetBundle("boilers", "StreamlineBoiler.prefab");
+		streamlineBoilerLoad = LoadAssetFromBundle(boilers, "StreamlineBoiler.prefab");
+		chonkyBoilerLoad = LoadAssetFromBundle(boilers, "ChonkyBoiler.prefab");
+
 		// Cabs
 		AssetBundle cabs = LoadAssetBundle("cabs");
 		defaultCabLoad = LoadAssetFromBundle(cabs, "DefaultCab.prefab");
@@ -151,7 +154,7 @@ public static class Main {
 		AssetBundle cowCatchers = LoadAssetBundle("cowcatchers");
 		defaultCowCatcherLoad = LoadAssetFromBundle(cowCatchers, "DefaultCowCatcher.prefab");
 		noCowCatcherLoad = LoadAssetFromBundle(cowCatchers, "NoCowCatcher.prefab");
-		streamlinedCowCatcherLoad = LoadAssetFromBundle(cowCatchers, "StreamlinedCowCatcher.prefab");
+		//streamlinedCowCatcherLoad = LoadAssetFromBundle(cowCatchers, "StreamlinedCowCatcher.prefab");
 		// Interiors
 		AssetBundle interiors = LoadAssetBundle("interiors");
 		defaultInteriorLoad = LoadAssetFromBundle(interiors, "DefaultInterior.prefab");
@@ -159,7 +162,7 @@ public static class Main {
 		// Smoke Box Door
 		AssetBundle smokeBoxDoor = LoadAssetBundle("smokeboxdoors");
 		defaultSmokeBoxDoorLoad = LoadAssetFromBundle(smokeBoxDoor, "DefaultSmokeBoxDoor.prefab");
-		frontSmokeBoxDoorLoad = LoadAssetFromBundle(smokeBoxDoor, "FrontSmokeBoxDoor.prefab");
+		//centerSmokeBoxDoorLoad = LoadAssetFromBundle(smokeBoxDoor, "CenterSmokeBoxDoor.prefab");
 		// Smoke Deflectors
 		AssetBundle smokeDeflectors = LoadAssetBundle("smokedeflectors");
 		wagnerSmokeDeflectorsLoad = LoadAssetFromBundle(smokeDeflectors, "WagnerSmokeDeflectors.prefab");
@@ -186,6 +189,12 @@ public static class Main {
 
 	public static GameObject LoadAssetFromBundle(AssetBundle assetBundle, String assetName) {
 		GameObject loadedObject = assetBundle.LoadAsset<GameObject>("Assets/" + assetName);
+
+		if(loadedObject == null) {
+			Error("Failed to load " + assetName);
+			return null;
+		}
+
 		return loadedObject;
 	}
 
@@ -197,8 +206,9 @@ public static class Main {
 		}
 
 		obj.transform.parent = toParent;
-		obj.transform.localPosition = new Vector3(0, 0, 4.887f);
+		obj.transform.localPosition = new Vector3(0, 0, objOffset);
 		obj.transform.localRotation = Quaternion.identity;
+
 		return obj;
 	}
 
